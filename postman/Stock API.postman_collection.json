@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "e442538d-b0b1-4887-a1a4-e3b96d8ec523",
+		"name": "Stock API",
+		"description": "This project provides a system for uploading and processing stock data (in CSV format), validating the data, storing it in MongoDB, and offering specific data retrieval APIs with calculations like highest volume, average close, and average VWAP.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31734076"
+	},
+	"item": [
+		{
+			"name": "CSV Upload Endpoint",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csvfile",
+							"type": "file",
+							"src": "C:\\Users\\Mohit Patel\\Downloads\\dataset\\BPCL.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}api/stocks/upload",
+					"host": [
+						"{{server}}api"
+					],
+					"path": [
+						"stocks",
+						"upload"
+					]
+				},
+				"description": "This endpoint accepts a CSV file, validates its structure and content, and uploads valid data to MongoDB.\n\n**Expected CSV Columns**:\n\n- Date, Symbol, Series, Prev Close, Open, High, Low, Last, Close, VWAP, Volume, Turnover, Trades, Deliverable, %Deliverable\n    \n\n**Validation Rules**:\n\n- **Date**: Must be in `YYYY-MM-DD` format.\n- **Numerical Fields**: Fields like `Prev Close`, `Open`, `High`, `Low`, etc., must be numbers."
+			},
+			"response": []
+		},
+		{
+			"name": "highest-volume",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/api/stocks/highest-volume?start_date=2008-11-27&end_date=2021-04-30&symbol=MUNDRAPORT",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"stocks",
+						"highest-volume"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2008-11-27"
+						},
+						{
+							"key": "end_date",
+							"value": "2021-04-30"
+						},
+						{
+							"key": "symbol",
+							"value": "MUNDRAPORT"
+						}
+					]
+				},
+				"description": "**Endpoint**: `/api/highest_volume`  \n**Method**: `GET`  \n**Parameters**:\n\n- `start_date`: Start date of the range (`YYYY-MM-DD`).\n    \n- `end_date`: End date of the range (`YYYY-MM-DD`).\n    \n- `symbol` (optional): Filter by stock symbol.\n    \n\n**Description**: Returns the record(s) with the highest volume within the specified date range or for the given symbol."
+			},
+			"response": []
+		},
+		{
+			"name": "average-close",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/api/stocks/average-close?start_date=2007-11-27&end_date=2021-04-30&symbol=MUNDRAPORT",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"stocks",
+						"average-close"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2007-11-27"
+						},
+						{
+							"key": "end_date",
+							"value": "2021-04-30"
+						},
+						{
+							"key": "symbol",
+							"value": "MUNDRAPORT"
+						}
+					]
+				},
+				"description": "**Endpoint**: `/api/average_close`  \n**Method**: `GET`  \n**Parameters**:\n\n- `start_date`: Start date of the range (`YYYY-MM-DD`).\n- `end_date`: End date of the range (`YYYY-MM-DD`).\n- `symbol`: Stock symbol to filter.\n    \n\n**Description**: Calculates and returns the average closing price for the specified symbol within the given date range."
+			},
+			"response": []
+		},
+		{
+			"name": "average-VWAP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/api/stocks/average-vwap?start_date=2007-11-27&end_date=2021-04-30&symbol=MUNDRAPORT",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"stocks",
+						"average-vwap"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2007-11-27"
+						},
+						{
+							"key": "end_date",
+							"value": "2021-04-30"
+						},
+						{
+							"key": "symbol",
+							"value": "MUNDRAPORT"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+            }
